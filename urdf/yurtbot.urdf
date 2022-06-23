@@ -1,12 +1,13 @@
 <robot name="yurtbot">
 
+  <!-- 
   <material name="white">
     <color rgba="1 1 1 1"/>
   </material>
 
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
-  </material>
+  </material> -->
 
   <link name="base_link">
     <visual>
@@ -14,7 +15,6 @@
         <mesh filename="package://urdf_tutorial/meshes/body_v1.STL"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="white"/>
     </visual>
     <collision>
       <geometry>
@@ -27,8 +27,12 @@
     	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
     </inertial>
   </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+  </gazebo> 
   
-  <joint name="prop_joint1" type="continuous">
+  <joint name="joint1" type="continuous">
     <parent link="base_link"/>
     <child link="prop1"/>
     <origin xyz="-0.12713 -0.07122 -0.05281" rpy="0 0 0" />
@@ -41,7 +45,6 @@
         <mesh filename="package://urdf_tutorial/meshes/prop_m_v1.STL"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="blue"/>
     </visual>
     <collision>
       <geometry>
@@ -55,7 +58,11 @@
     </inertial>
   </link>
 
-    <joint name="prop_joint2" type="continuous">
+  <gazebo reference="prop1">
+    <material>Gazebo/White</material>
+  </gazebo> 
+
+    <joint name="joint2" type="continuous">
     <parent link="base_link"/>
     <child link="prop2"/>
     <origin xyz="0.12713 -0.07122 -0.05281" rpy="0 0 0" />
@@ -68,7 +75,6 @@
         <mesh filename="package://urdf_tutorial/meshes/prop_m_v1.STL"/>
       </geometry>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="blue"/>
     </visual>
     <collision>
       <geometry>
@@ -82,4 +88,75 @@
     </inertial>
   </link>
 
+  <gazebo reference="prop2">
+    <material>Gazebo/White</material>
+  </gazebo> 
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-buoyancy-system"
+      name="ignition::gazebo::systems::Buoyancy">
+      <uniform_fluid_density>1000</uniform_fluid_density>
+    </plugin>
+    <plugin
+     filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>tethys</namespace>
+      <joint_name>joint1</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>tethys</namespace>
+      <joint_name>joint2</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+  </gazebo>
+
+  <!-- 
+  <gazebo reference="prop1">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+  </gazebo>
+  <gazebo reference="prop2">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+  </gazebo> -->
+
+
+
   </robot>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

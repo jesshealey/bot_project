@@ -1,0 +1,270 @@
+<robot name="convoy">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="5 2 1"/>
+      </geometry>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <!-- <material name="blue"/> --> 
+    </visual>
+    <collision>
+      <geometry>
+        <box size="5 2 1"/>
+      </geometry>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+  
+  <gazebo reference="base_link">
+    <material>Gazebo/Orange</material>
+  </gazebo> 
+
+  <link name="wheel1">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 -0.25 0" rpy="1.57075 0 0"/>
+      <!-- <material name="white"/> -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 -0.25 0" rpy="1.57075 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="wheel1">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  
+  <link name="wheel2">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 0.25 0" rpy="1.57075 0 0"/>
+      <!-- <material name="white"/> -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 0.25 0" rpy="1.57075 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="wheel2">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  
+  <link name="wheel3">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 -0.25 0" rpy="1.57075 0 0"/>
+      <!-- <material name="white"/> -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 -0.25 0" rpy="1.57075 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>  
+
+  <gazebo reference="wheel3">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  
+  <link name="wheel4">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 0.25 0" rpy="1.57075 0 0"/>
+      <!-- <material name="white"/> -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 0.25 0" rpy="1.57075 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>  
+  
+  <gazebo reference="wheel4">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <link name="lidar">
+    <visual>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <!-- <material name="white"/> -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.5" radius="0.5"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+    	<mass value="5"/>
+    	<inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+  </link>  
+
+  <gazebo reference="lidar">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+
+
+
+
+
+
+  <joint name="joint1" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel1"/>
+    <origin xyz="2 -1 0.5" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <joint name="joint2" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel2"/>
+    <origin xyz="2 1 0.5" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <joint name="joint3" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel3"/>
+    <origin xyz="-2 -1 0.5" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  
+   <joint name="joint4" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel4"/>
+    <origin xyz="-2 1 0.5" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  
+  <joint name="joint5" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar"/>
+    <origin xyz="-0.5 0 1.75" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+  
+  
+  
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+  
+  
+  
+        <!-- This block provides the simulator (Gazebo) with information on a few
+         additional physical properties. See http://gazebosim.org/tutorials/
+         ?tut=ros_urdf for more -->
+    <gazebo reference="wheel1">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="wheel2">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="wheel3">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="wheel4">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+       <!-- This block connects the wheel joint to an actuator (motor), which
+        informs both simulation and visualization of the robot -->
+    <transmission name="wheel1_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="wheel1_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="joint1">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+  <transmission name="wheel2_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="wheel2_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="joint2">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+    <transmission name="wheel3_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="wheel3_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="joint3">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+    <transmission name="wheel4_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="whee4l_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="joint4">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+  
+</robot>
